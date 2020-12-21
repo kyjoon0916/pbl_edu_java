@@ -1,0 +1,21 @@
+    public Boolean isValidDate(){
+        if((this.month>12)){return false;}//'달'은 12 이하여야 함
+        if((this.day<0)||(this.month<0)){return false;}//'일'과 '달'은 무조건 양수여야 함
+        switch(month){
+            //2월 검사는 2페이즈 (윤년 or not)
+            case 2:
+                //윤년은 4로 나누어지지만 100으로 나누어떨어지지 않는 해, 또는 400으로 나누어떨어지는 해.
+                if(((year%4==0)&&(year%100!=0))||(year%400==0)){return !(this.day>29);}
+                //아니면 28일까지만
+                else{return !(this.day>28);}
+            //31일까지 있는 달인가
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                return !(this.day>31);
+            //30일까지 있는 달인가
+            case 4: case 6: case 9: case 11:
+                return !(this.day>30);
+            default:
+                return false;
+        }
+
+    }
